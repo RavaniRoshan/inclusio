@@ -1,73 +1,69 @@
-# Welcome to your Lovable project
+# AccessiScan
 
-## Project info
+**Continuous ADA/WCAG compliance monitoring designed for SMBs who can't afford enterprise solutions.**
 
-**URL**: https://lovable.dev/projects/5b94058f-2d05-471b-9bf7-8881a5216656
+## About The Project
 
-## How can I edit this code?
+AccessiScan is a web application that provides automated accessibility monitoring to help small and medium-sized businesses ensure their websites are compliant with ADA/WCAG standards. It offers real-time scanning, actionable recommendations, and progress tracking to make web accessibility simple and affordable.
 
-There are several ways of editing your application.
+This project is a frontend application built with React and Vite, showcasing a modern, responsive landing page for the AccessiScan service.
 
-**Use Lovable**
+## Key Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5b94058f-2d05-471b-9bf7-8881a5216656) and start prompting.
+-   **Real-time Scanning**: AI-powered continuous monitoring of your digital assets for compliance violations.
+-   **Instant Fixes**: Get actionable recommendations with step-by-step implementation guidance.
+-   **SMB Focused**: Affordable accessibility solutions designed specifically for small and medium businesses.
+-   **Compliance Tracking**: Track your progress and maintain ongoing ADA/WCAG compliance effortlessly.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Live Demo
 
-**Use your preferred IDE**
+[Link to Live Demo](https://your-live-demo-url.com)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+To get a local copy up and running, follow these simple steps.
 
-Follow these steps:
+### Prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+You need to have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your machine.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/your_username/your_repository.git
+    ```
+2.  Install NPM packages
+    ```sh
+    npm install
+    ```
+3.  Run the development server
+    ```sh
+    npm run dev
+    ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies Used
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+-   [Vite](https://vitejs.dev/)
+-   [React](https://reactjs.org/)
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [Tailwind CSS](https://tailwindcss.com/)
+-   [shadcn/ui](https://ui.shadcn.com/)
 
-## How can I deploy this project?
+## Contributing
 
-Simply open [Lovable](https://lovable.dev/projects/5b94058f-2d05-471b-9bf7-8881a5216656) and click on Share -> Publish.
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Can I connect a custom domain to my Lovable project?
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 
-Yes, you can!
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Distributed under the MIT License. See `LICENSE` for more information.
