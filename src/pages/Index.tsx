@@ -1,7 +1,7 @@
-import AccessibilityScanner from '@/components/AccessibilityScanner';
+import LandingPage from '@/components/LandingPage';
 
 const Index = () => {
-  return <AccessibilityScanner />;
+  return <LandingPage />;
 };
 
 export default Index;
