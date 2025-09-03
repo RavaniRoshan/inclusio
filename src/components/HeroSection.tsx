@@ -20,109 +20,130 @@ export const HeroSection = () => {
   const featuresRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline();
+    // Add delay to ensure DOM is fully ready
+    const timer = setTimeout(() => {
+      const tl = gsap.timeline();
 
-    // Shader effect animation
-    if (shaderRef.current) {
-      gsap.set(shaderRef.current, {
-        background: "linear-gradient(45deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)))",
-        backgroundSize: "400% 400%"
-      });
-      
-      gsap.to(shaderRef.current, {
-        backgroundPosition: "100% 100%",
-        duration: 8,
-        ease: "none",
-        repeat: -1,
-        yoyo: true
-      });
-    }
-
-    // Hero content animations
-    tl.fromTo(titleRef.current,
-      { 
-        y: 100, 
-        opacity: 0,
-        scale: 0.8
-      },
-      { 
-        y: 0, 
-        opacity: 1,
-        scale: 1,
-        duration: 1.5,
-        ease: "elastic.out(1, 0.5)"
-      }
-    )
-    .fromTo(subtitleRef.current,
-      { 
-        y: 50, 
-        opacity: 0 
-      },
-      { 
-        y: 0, 
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out"
-      },
-      "-=0.8"
-    )
-    .fromTo(ctaRef.current?.children,
-      { 
-        y: 30, 
-        opacity: 0,
-        scale: 0.9
-      },
-      { 
-        y: 0, 
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-        stagger: 0.1
-      },
-      "-=0.5"
-    )
-    .fromTo(featuresRef.current?.children,
-      { 
-        x: -30, 
-        opacity: 0 
-      },
-      { 
-        x: 0, 
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-        stagger: 0.1
-      },
-      "-=0.3"
-    );
-
-    // Floating animation for hero elements
-    gsap.to(titleRef.current, {
-      y: -10,
-      duration: 3,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true
-    });
-
-    // Parallax effect on scroll
-    const handleScroll = () => {
-      if (heroRef.current) {
-        const scrollY = window.scrollY;
-        gsap.to(heroRef.current, {
-          y: scrollY * 0.5,
-          duration: 0.3,
-          ease: "power2.out"
+      // Shader effect animation with null checks
+      if (shaderRef.current) {
+        gsap.set(shaderRef.current, {
+          background: "linear-gradient(45deg, hsl(195 85% 35%), hsl(195 25% 95%), hsl(160 60% 45%))",
+          backgroundSize: "400% 400%",
+          backgroundPosition: "0% 0%"
+        });
+        
+        gsap.to(shaderRef.current, {
+          backgroundPosition: "100% 100%",
+          duration: 8,
+          ease: "none",
+          repeat: -1,
+          yoyo: true
         });
       }
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    
+      // Hero content animations with null checks
+      if (titleRef.current) {
+        tl.fromTo(titleRef.current,
+          { 
+            y: 100, 
+            opacity: 0,
+            scale: 0.8
+          },
+          { 
+            y: 0, 
+            opacity: 1,
+            scale: 1,
+            duration: 1.5,
+            ease: "elastic.out(1, 0.5)"
+          }
+        );
+      }
+      
+      if (subtitleRef.current) {
+        tl.fromTo(subtitleRef.current,
+          { 
+            y: 50, 
+            opacity: 0 
+          },
+          { 
+            y: 0, 
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out"
+          },
+          "-=0.8"
+        );
+      }
+      
+      if (ctaRef.current?.children) {
+        tl.fromTo([...ctaRef.current.children],
+          { 
+            y: 30, 
+            opacity: 0,
+            scale: 0.9
+          },
+          { 
+            y: 0, 
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            stagger: 0.1
+          },
+          "-=0.5"
+        );
+      }
+      
+      if (featuresRef.current?.children) {
+        tl.fromTo([...featuresRef.current.children],
+          { 
+            x: -30, 
+            opacity: 0 
+          },
+          { 
+            x: 0, 
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.1
+          },
+          "-=0.3"
+        );
+      }
+
+      // Floating animation for hero elements
+      if (titleRef.current) {
+        gsap.to(titleRef.current, {
+          y: -10,
+          duration: 3,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      // Parallax effect on scroll
+      const handleScroll = () => {
+        if (heroRef.current) {
+          const scrollY = window.scrollY;
+          gsap.to(heroRef.current, {
+            y: scrollY * 0.5,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        tl.kill();
+      };
+    }, 100); // Small delay to ensure DOM is ready
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      tl.kill();
+      clearTimeout(timer);
     };
   }, []);
 

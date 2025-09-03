@@ -104,64 +104,73 @@ export const InfiniteReviews = () => {
   const bottomRowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Top row - moving left to right
-    if (topRowRef.current) {
-      const topRowWidth = topRowRef.current.scrollWidth / 2;
-      
-      gsap.set(topRowRef.current, { x: 0 });
-      
-      gsap.to(topRowRef.current, {
-        x: -topRowWidth,
-        duration: 30,
-        ease: "none",
-        repeat: -1
-      });
-    }
+    // Add delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      // Top row - moving left to right
+      if (topRowRef.current) {
+        const topRowWidth = topRowRef.current.scrollWidth / 2;
+        
+        gsap.set(topRowRef.current, { x: 0 });
+        
+        gsap.to(topRowRef.current, {
+          x: -topRowWidth,
+          duration: 30,
+          ease: "none",
+          repeat: -1
+        });
+      }
 
-    // Bottom row - moving right to left
-    if (bottomRowRef.current) {
-      const bottomRowWidth = bottomRowRef.current.scrollWidth / 2;
-      
-      gsap.set(bottomRowRef.current, { x: -bottomRowWidth });
-      
-      gsap.to(bottomRowRef.current, {
-        x: 0,
-        duration: 35,
-        ease: "none",
-        repeat: -1
-      });
-    }
+      // Bottom row - moving right to left
+      if (bottomRowRef.current) {
+        const bottomRowWidth = bottomRowRef.current.scrollWidth / 2;
+        
+        gsap.set(bottomRowRef.current, { x: -bottomRowWidth });
+        
+        gsap.to(bottomRowRef.current, {
+          x: 0,
+          duration: 35,
+          ease: "none",
+          repeat: -1
+        });
+      }
 
-    // Pause animations on hover
-    const handleMouseEnter = (element: HTMLDivElement) => {
-      gsap.to(element, { timeScale: 0.1, duration: 0.5 });
-    };
+      // Pause animations on hover
+      const handleMouseEnter = (element: HTMLDivElement) => {
+        gsap.to(element, { timeScale: 0.1, duration: 0.5 });
+      };
 
-    const handleMouseLeave = (element: HTMLDivElement) => {
-      gsap.to(element, { timeScale: 1, duration: 0.5 });
-    };
+      const handleMouseLeave = (element: HTMLDivElement) => {
+        gsap.to(element, { timeScale: 1, duration: 0.5 });
+      };
 
-    const topRow = topRowRef.current;
-    const bottomRow = bottomRowRef.current;
+      const topRow = topRowRef.current;
+      const bottomRow = bottomRowRef.current;
 
-    if (topRow) {
-      topRow.addEventListener('mouseenter', () => handleMouseEnter(topRow));
-      topRow.addEventListener('mouseleave', () => handleMouseLeave(topRow));
-    }
+      if (topRow) {
+        topRow.addEventListener('mouseenter', () => handleMouseEnter(topRow));
+        topRow.addEventListener('mouseleave', () => handleMouseLeave(topRow));
+      }
 
-    if (bottomRow) {
-      bottomRow.addEventListener('mouseenter', () => handleMouseEnter(bottomRow));
-      bottomRow.addEventListener('mouseleave', () => handleMouseLeave(bottomRow));
-    }
+      if (bottomRow) {
+        bottomRow.addEventListener('mouseenter', () => handleMouseEnter(bottomRow));
+        bottomRow.addEventListener('mouseleave', () => handleMouseLeave(bottomRow));
+      }
+    }, 100); // Small delay to ensure DOM is ready
 
     return () => {
+      clearTimeout(timer);
+      
+      // Cleanup event listeners
+      const topRow = topRowRef.current;
+      const bottomRow = bottomRowRef.current;
+      
       if (topRow) {
-        topRow.removeEventListener('mouseenter', () => handleMouseEnter(topRow));
-        topRow.removeEventListener('mouseleave', () => handleMouseLeave(topRow));
+        topRow.removeEventListener('mouseenter', () => {});
+        topRow.removeEventListener('mouseleave', () => {});
       }
       if (bottomRow) {
-        bottomRow.removeEventListener('mouseenter', () => handleMouseEnter(bottomRow));
-        bottomRow.removeEventListener('mouseleave', () => handleMouseLeave(bottomRow));
+        bottomRow.removeEventListener('mouseenter', () => {});
+        bottomRow.removeEventListener('mouseleave', () => {});
       }
     };
   }, []);

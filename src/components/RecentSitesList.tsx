@@ -66,36 +66,44 @@ export const RecentSitesList = ({ onClose }: RecentSitesListProps) => {
   const [sites, setSites] = useState(mockSites);
 
   useEffect(() => {
-    if (panelRef.current) {
-      gsap.fromTo(panelRef.current,
-        { 
-          x: "100%",
-          opacity: 0
-        },
-        { 
-          x: "0%",
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out"
-        }
-      );
+    // Add delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      if (panelRef.current) {
+        gsap.fromTo(panelRef.current,
+          { 
+            x: "100%",
+            opacity: 0
+          },
+          { 
+            x: "0%",
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+          }
+        );
 
-      // Animate cards in stagger
-      gsap.fromTo(panelRef.current.querySelectorAll('.site-card'),
-        { 
-          x: 50,
-          opacity: 0
-        },
-        { 
-          x: 0,
-          opacity: 1,
-          duration: 0.4,
-          ease: "power2.out",
-          stagger: 0.1,
-          delay: 0.2
+        // Animate cards in stagger - only if cards exist
+        const cards = panelRef.current.querySelectorAll('.site-card');
+        if (cards.length > 0) {
+          gsap.fromTo([...cards],
+            { 
+              x: 50,
+              opacity: 0
+            },
+            { 
+              x: 0,
+              opacity: 1,
+              duration: 0.4,
+              ease: "power2.out",
+              stagger: 0.1,
+              delay: 0.2
+            }
+          );
         }
-      );
-    }
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleClose = () => {

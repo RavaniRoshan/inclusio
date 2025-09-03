@@ -56,36 +56,44 @@ export const SettingsPanel = ({ onClose }: SettingsPanelProps) => {
   });
 
   useEffect(() => {
-    if (panelRef.current) {
-      gsap.fromTo(panelRef.current,
-        { 
-          x: "-100%",
-          opacity: 0
-        },
-        { 
-          x: "0%",
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out"
-        }
-      );
+    // Add delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      if (panelRef.current) {
+        gsap.fromTo(panelRef.current,
+          { 
+            x: "-100%",
+            opacity: 0
+          },
+          { 
+            x: "0%",
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+          }
+        );
 
-      // Animate sections in stagger
-      gsap.fromTo(panelRef.current.querySelectorAll('.settings-section'),
-        { 
-          x: -30,
-          opacity: 0
-        },
-        { 
-          x: 0,
-          opacity: 1,
-          duration: 0.4,
-          ease: "power2.out",
-          stagger: 0.1,
-          delay: 0.2
+        // Animate sections in stagger - only if sections exist
+        const sections = panelRef.current.querySelectorAll('.settings-section');
+        if (sections.length > 0) {
+          gsap.fromTo([...sections],
+            { 
+              x: -30,
+              opacity: 0
+            },
+            { 
+              x: 0,
+              opacity: 1,
+              duration: 0.4,
+              ease: "power2.out",
+              stagger: 0.1,
+              delay: 0.2
+            }
+          );
         }
-      );
-    }
+      }
+    }, 50);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleClose = () => {
