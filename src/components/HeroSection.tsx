@@ -27,7 +27,7 @@ export const HeroSection = () => {
       // Shader effect animation with null checks
       if (shaderRef.current) {
         gsap.set(shaderRef.current, {
-          background: "linear-gradient(45deg, hsl(195 85% 35%), hsl(195 25% 95%), hsl(160 60% 45%))",
+          background: "linear-gradient(45deg, hsl(195, 85%, 35%), hsl(195, 25%, 95%), hsl(160, 60%, 45%))",
           backgroundSize: "400% 400%",
           backgroundPosition: "0% 0%"
         });
