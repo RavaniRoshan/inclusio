@@ -167,7 +167,7 @@ export const InfiniteReviews = () => {
   }, []);
 
   // Duplicate reviews for infinite scroll
-  const duplicatedReviews = [...reviews, ...reviews];
+  const duplicatedReviews = reviews ? [...reviews, ...reviews] : [];
 
   return (
     <section className="py-24 overflow-hidden bg-gradient-to-b from-background to-primary/5">
@@ -186,9 +186,9 @@ export const InfiniteReviews = () => {
           ref={topRowRef}
           className="flex"
         >
-          {duplicatedReviews.slice(0, 8).map((review, index) => (
+          {duplicatedReviews?.slice(0, 8)?.map((review, index) => (
             <ReviewCard key={`top-${index}`} review={review} index={index} />
-          ))}
+          )) || null}
         </div>
       </div>
 
@@ -198,9 +198,9 @@ export const InfiniteReviews = () => {
           ref={bottomRowRef}
           className="flex"
         >
-          {duplicatedReviews.slice(0, 8).map((review, index) => (
+          {duplicatedReviews?.slice(0, 8)?.map((review, index) => (
             <ReviewCard key={`bottom-${index}`} review={review} index={index} />
-          ))}
+          )) || null}
         </div>
       </div>
     </section>
